@@ -1,0 +1,13 @@
+server:
+  port: 4003
+spring:
+  datasource:
+    username: testuser
+    password: testuser123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/serviceshark_db
+  jpa:
+    show-sql: true
+    database: MYSQL
+    hibernate:
+      ddl-auto: update

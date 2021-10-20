@@ -1,0 +1,13 @@
+package io.serviceshark.api;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class ServicesharkSpringApiApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
