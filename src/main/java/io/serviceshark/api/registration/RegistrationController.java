@@ -3,6 +3,7 @@ package io.serviceshark.api.registration;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("RegistrationController")
 @RequestMapping(path = "/api/registration")
 public class RegistrationController {
+
+  @Autowired
+  private UserRegistrationService userRegistrationService;
   
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @PostMapping(
@@ -24,6 +28,12 @@ public class RegistrationController {
     produces = MediaType.APPLICATION_JSON_VALUE
   )
   public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterUserDto registerUserDto) {
-    return ResponseEntity.status(HttpStatus.OK).body("Good");
+    try {
+      this.userRegistrationService.createUser(registerUserDto);
+      return ResponseEntity.status(HttpStatus.OK).body("Good");
+    } catch (Exception ex) {
+      System.out.println(ex.getMessage());
+      return ResponseEntity.badRequest().build();
+    }
   }
 }

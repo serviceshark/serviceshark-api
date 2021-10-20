@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import io.serviceshark.api.registration.RegisterUserDto;
 import lombok.Getter;
 
 @Entity
@@ -23,8 +25,20 @@ public class User {
   private String username;
 
   @Column
+  private String email;
+
+  @Column
   private String password;
 
   @Column
   private boolean enabled;
+
+  public User(RegisterUserDto registerUserDto) {
+    this.username = registerUserDto.getUsername();
+    this.password = registerUserDto.getPassword();
+    this.email = registerUserDto.getEmail();
+    this.enabled = true;
+  }
+
+  public User() {}
 }

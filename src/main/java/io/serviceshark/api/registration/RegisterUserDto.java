@@ -1,7 +1,6 @@
 package io.serviceshark.api.registration;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.Getter;
@@ -23,4 +22,5 @@ public class RegisterUserDto {
 
   @NotEmpty(message = "Must confirm password")
   private String confirm;
+
 }
