@@ -1,4 +1,4 @@
-package io.serviceshark.api;
+package io.serviceshark.api.security;
 
 import javax.sql.DataSource;
 
@@ -14,11 +14,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
+import io.serviceshark.api.authentication.AuthenticationService;
+
 @Configuration
 @EnableWebSecurity
 public class ServiceSharkSecurity extends WebSecurityConfigurerAdapter {
   
   private final String LOGIN_PROCESSING_URL = "/api/auth/login";
+
+  @Autowired
+  private AuthenticationService authenticationService;
 
   @Autowired
   DataSource dataSource;
@@ -39,7 +44,7 @@ public class ServiceSharkSecurity extends WebSecurityConfigurerAdapter {
     System.out.println("DaoAuthenticationProvider");
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
     provider.setPasswordEncoder(this.passwordEncoder());
-    provider.setUserDetailsService(this.userDetailsService());
+    provider.setUserDetailsService(this.authenticationService);
     return provider;
   }
     
